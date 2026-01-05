@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome - Premium Landing Page</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        .navbar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            top: -100px;
+            right: -100px;
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            bottom: -80px;
+            left: -80px;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            max-width: 800px;
+            padding: 20px;
+        }
+        
+        .feature-card {
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: #667eea;
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.2);
+        }
+        
+        .btn-primary-custom {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary-custom:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.3);
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 450px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.3s ease;
+        }
+        
+        @keyframes slideUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .input-field {
+            border: 2px solid #e5e7eb;
+            transition: all 0.3s ease;
+        }
+        
+        .input-field:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .footer {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        }
+        
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            background: rgba(102, 126, 234, 1);
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation Bar -->
+    <nav class="navbar fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center space-x-2 text-white">
+                    <i class="bi bi-rocket-fill text-2xl"></i>
+                    <span class="text-xl font-bold">TechHub</span>
+                </div>
+                
+                <!-- Navigation Links -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="text-white hover:text-gray-200 transition duration-300 flex items-center space-x-1">
+                        <i class="bi bi-house-fill"></i>
+                        <span>Home</span>
+                    </a>
+                    <a href="#features" class="text-white hover:text-gray-200 transition duration-300 flex items-center space-x-1">
+                        <i class="bi bi-star-fill"></i>
+                        <span>Features</span>
+                    </a>
+                    <a href="#about" class="text-white hover:text-gray-200 transition duration-300 flex items-center space-x-1">
+                        <i class="bi bi-info-circle-fill"></i>
+                        <span>About</span>
+                    </a>
+                    <a href="#contact" class="text-white hover:text-gray-200 transition duration-300 flex items-center space-x-1">
+                        <i class="bi bi-envelope-fill"></i>
+                        <span>Contact</span>
+                    </a>
+                </div>
+                
+                <!-- Auth Buttons -->
+                <div class="flex space-x-3">
+                    <button id="loginBtn" class="px-6 py-2 text-white rounded-lg hover:bg-white hover:text-purple-600 transition duration-300 font-semibold">
+                        Login
+                    </button>
+                    <button id="signupBtn" class="px-6 py-2 bg-white text-purple-600 rounded-lg hover:bg-gray-200 transition duration-300 font-semibold hidden md:block">
+                        Sign Up
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1 class="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
+                Welcome to <span class="text-yellow-300">TechHub</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-white mb-8 leading-relaxed">
+                Transform your ideas into reality with our cutting-edge technology platform
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <button class="btn-primary-custom text-white px-8 py-3 rounded-lg font-semibold flex items-center justify-center space-x-2 hover:shadow-lg">
+                    <i class="bi bi-play-circle-fill"></i>
+                    <span>Get Started</span>
+                </button>
+                <button class="px-8 py-3 bg-white text-purple-600 rounded-lg font-semibold flex items-center justify-center space-x-2 hover:shadow-lg transition duration-300">
+                    <i class="bi bi-arrow-right"></i>
+                    <span>Learn More</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+                    Powerful Features
+                </h2>
+                <p class="text-xl text-gray-600">
+                    Everything you need to succeed in one platform
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="feature-card bg-gray-50 p-8 rounded-lg shadow-lg">
+                    <div class="text-4xl text-purple-600 mb-4">
+                        <i class="bi bi-lightning-fill"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Lightning Fast</h3>
+                    <p class="text-gray-600">
+                        Experience blazing-fast performance with our optimized infrastructure and cutting-edge technology stack.
+                    </p>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="feature-card bg-gray-50 p-8 rounded-lg shadow-lg">
+                    <div class="text-4xl text-blue-600 mb-4">
+                        <i class="bi bi-shield-lock-fill"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Secure & Reliable</h3>
+                    <p class="text-gray-600">
+                        Your data is protected with enterprise-grade security measures and 99.9% uptime guarantee.
+                    </p>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="feature-card bg-gray-50 p-8 rounded-lg shadow-lg">
+                    <div class="text-4xl text-green-600 mb-4">
+                        <i class="bi bi-cpu-fill"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Scalable Solutions</h3>
+                    <p class="text-gray-600">
+                        Grow your business without limits with our scalable infrastructure that grows with you.
+                    </p>
+                </div>
+                
+                <!-- Feature 4 -->
+                <div class="feature-card bg-gray-50 p-8 rounded-lg shadow-lg">
+                    <div class="text-4xl text-red-600 mb-4">
+                        <i class="bi bi-people-fill"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Team Collaboration</h3>
+                    <p class="text-gray-600">
+                        Work seamlessly with your team using our intuitive collaboration tools and real-time updates.
+                    </p>
+                </div>
+                
+                <!-- Feature 5 -->
+                <div class="feature-card bg-gray-50 p-8 rounded-lg shadow-lg">
+                    <div class="text-4xl text-yellow-600 mb-4">
+                        <i class="bi bi-graph-up-arrow"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Analytics & Insights</h3>
+                    <p class="text-gray-600">
+                        Get powerful analytics and actionable insights to drive your business decisions forward.
+                    </p>
+                </div>
+                
+                <!-- Feature 6 -->
+                <div class="feature-card bg-gray-50 p-8 rounded-lg shadow-lg">
+                    <div class="text-4xl text-indigo-600 mb-4">
+                        <i class="bi bi-headset"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">24/7 Support</h3>
+                    <p class="text-gray-600">
+                        Our dedicated support team is always available to help you succeed with our platform.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-100">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
+                        About TechHub
+                    </h2>
+                    <p class="text-lg text-gray-600 mb-4 leading-relaxed">
+                        TechHub is a leading platform dedicated to helping businesses and individuals leverage technology to achieve their goals. With years of experience and thousands of satisfied customers, we're committed to excellence.
+                    </p>
+                    <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                        Our mission is to make advanced technology accessible, affordable, and easy to use for everyone, regardless of technical expertise.
+                    </p>
+                    <div class="flex space-x-6">
+                        <div>
+                            <p class="text-3xl font-bold text-purple-600">10K+</p>
+                            <p class="text-gray-600">Active Users</p>
+                        </div>
+                        <div>
+                            <p class="text-3xl font-bold text-purple-600">500+</p>
+                            <p class="text-gray-600">Companies</p>
+                        </div>
+                        <div>
+                            <p class="text-3xl font-bold text-purple-600">99.9%</p>
+                            <p class="text-gray-600">Uptime</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center justify-center">
+                    <div class="text-6xl text-purple-600">
+                        <i class="bi bi-rocket-takeoff-fill"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
+                Get In Touch
+            </h2>
+            <p class="text-xl text-gray-600 mb-12">
+                Have questions? We'd love to hear from you. Send us a message!
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <button class="btn-primary-custom text-white px-8 py-3 rounded-lg font-semibold flex items-center justify-center space-x-2 hover:shadow-lg">
+                    <i class="bi bi-envelope-fill"></i>
+                    <span>Email Us</span>
+                </button>
+                <button class="px-8 py-3 border-2 border-purple-600 text-purple-600 rounded-lg font-semibold flex items-center justify-center space-x-2 hover:bg-purple-50 transition duration-300">
+                    <i class="bi bi-telephone-fill"></i>
+                    <span>Call Us</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-gray-800">Login to Your Account</h2>
+                <button class="close-modal text-gray-500 hover:text-gray-700 text-2xl" data-modal="loginModal">
+                    <i class="bi bi-x"></i>
+                </button>
+            </div>
+            
+            <form>
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-semibold mb-2">Email Address</label>
+                    <input type="email" class="input-field w-full px-4 py-2 rounded-lg" placeholder="your@email.com" required>
+                </div>
+                
+                <div class="mb-6">
+                    <label class="block text-gray-700 font-semibold mb-2">Password</label>
+                    <input type="password" class="input-field w-full px-4 py-2 rounded-lg" placeholder="••••••••" required>
+                </div>
+                
+                <div class="flex items-center justify-between mb-6">
+                    <label class="flex items-center">
+                        <input type="checkbox" class="w-4 h-4 text-purple-600 rounded" checked>
+                        <span class="ml-2 text-gray-700">Remember me</span>
+                    </label>
+                    <a href="#" class="text-purple-600 hover:text-purple-800 font-semibold">Forgot Password?</a>
+                </div>
+                
+                <button type="submit" class="btn-primary-custom w-full text-white py-2 rounded-lg font-semibold hover:shadow-lg">
+                    Login
+                </button>
+            </form>
+            
+            <p class="text-center text-gray-600 mt-4">
+                Don't have an account? 
+                <button type="button" id="switchToSignup" class="text-purple-600 hover:text-purple-800 font-semibold">
+                    Sign Up
+                </button>
+            </p>
+        </div>
+    </div>
+
+    <!-- Sign Up Modal -->
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-gray-800">Create Your Account</h2>
+                <button class="close-modal text-gray-500 hover:text-gray-700 text-2xl" data-modal="signupModal">
+                    <i class="bi bi-x"></i>
+                </button>
+            </div>
+            
+            <form>
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-semibold mb-2">Full Name</label>
+                    <input type="text" class="input-field w-full px-4 py-2 rounded-lg" placeholder="John Doe" required>
+                </div>
+                
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-semibold mb-2">Email Address</label>
+                    <input type="email" class="input-field w-full px-4 py-2 rounded-lg" placeholder="your@email.com" required>
+                </div>
+                
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-semibold mb-2">Password</label>
+                    <input type="password" class="input-field w-full px-4 py-2 rounded-lg" placeholder="••••••••" required>
+                </div>
+                
+                <div class="mb-6">
+                    <label class="block text-gray-700 font-semibold mb-2">Confirm Password</label>
+                    <input type="password" class="input-field w-full px-4 py-2 rounded-lg" placeholder="••••••••" required>
+                </div>
+                
+                <label class="flex items-center mb-6">
+                    <input type="checkbox" class="w-4 h-4 text-purple-600 rounded" required>
+                    <span class="ml-2 text-gray-700">I agree to the <a href="#" class="text-purple-600 hover:text-purple-800">Terms and Conditions</a></span>
+                </label>
+                
+                <button type="submit" class="btn-primary-custom w-full text-white py-2 rounded-lg font-semibold hover:shadow-lg">
+                    Create Account
+                </button>
+            </form>
+            
+            <p class="text-center text-gray-600 mt-4">
+                Already have an account? 
+                <button type="button" id="switchToLogin" class="text-purple-600 hover:text-purple-800 font-semibold">
+                    Login
+                </button>
+            </p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer text-white py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <!-- Company Info -->
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <i class="bi bi-rocket-fill text-2xl text-purple-400"></i>
+                        <span class="text-xl font-bold">TechHub</span>
+                    </div>
+                    <p class="text-gray-400 text-sm">
+                        Empowering businesses and individuals with cutting-edge technology solutions.
+                    </p>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-400 hover:text-white transition">Home</a></li>
+                        <li><a href="#features" class="text-gray-400 hover:text-white transition">Features</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-white transition">About</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white transition">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Resources -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Resources</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Documentation</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Support</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Connect -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Connect With Us</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="social-icon">
+                            <i class="bi bi-facebook"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="bi bi-twitter"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="bi bi-linkedin"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="bi bi-github"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Divider -->
+            <div class="border-t border-gray-700 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-400 text-sm">
+                        &copy; 2026 TechHub. All rights reserved.
+                    </p>
+                    <div class="flex space-x-6 mt-4 md:mt-0">
+                        <a href="#" class="text-gray-400 hover:text-white text-sm transition">Privacy Policy</a>
+                        <a href="#" class="text-gray-400 hover:text-white text-sm transition">Terms of Service</a>
+                        <a href="#" class="text-gray-400 hover:text-white text-sm transition">Cookie Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Modal Management
+        const loginBtn = document.getElementById('loginBtn');
+        const signupBtn = document.getElementById('signupBtn');
+        const loginModal = document.getElementById('loginModal');
+        const signupModal = document.getElementById('signupModal');
+        const closeModals = document.querySelectorAll('.close-modal');
+        const switchToSignup = document.getElementById('switchToSignup');
+        const switchToLogin = document.getElementById('switchToLogin');
+        
+        // Open Login Modal
+        loginBtn.addEventListener('click', () => {
+            loginModal.classList.add('show');
+        });
+        
+        // Open Sign Up Modal
+        signupBtn.addEventListener('click', () => {
+            signupModal.classList.add('show');
+        });
+        
+        // Close Modals
+        closeModals.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const modalId = e.currentTarget.getAttribute('data-modal');
+                document.getElementById(modalId).classList.remove('show');
+            });
+        });
+        
+        // Switch to Sign Up from Login
+        switchToSignup.addEventListener('click', (e) => {
+            e.preventDefault();
+            loginModal.classList.remove('show');
+            signupModal.classList.add('show');
+        });
+        
+        // Switch to Login from Sign Up
+        switchToLogin.addEventListener('click', (e) => {
+            e.preventDefault();
+            signupModal.classList.remove('show');
+            loginModal.classList.add('show');
+        });
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === loginModal) {
+                loginModal.classList.remove('show');
+            }
+            if (e.target === signupModal) {
+                signupModal.classList.remove('show');
+            }
+        });
+        
+        // Smooth Scrolling for Navigation Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+        
+        // Form Submission Handler
+        document.querySelectorAll('form').forEach(form => {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                alert('Form submitted! This is a demo.');
+                form.reset();
+            });
+        });
+    </script>
+</body>
+</html>
